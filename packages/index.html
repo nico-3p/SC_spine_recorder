@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="
+            default-src 'self';
+            script-src 'self' https://cdn.jsdelivr.net;
+            style-src 'self' https://cdn.jsdelivr.net;
+            img-src 'self' https://cf-static.shinycolors.moe;
+            connect-src 'self' https://api.shinycolors.moe https://cf-static.shinycolors.moe"
+        />
+        <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+        <title>sc_spine_recorder</title>
+        <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.12/dist/pixi.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pixi-spine@3.1.2/dist/pixi-spine.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pixi-filters@5.3.0/dist/browser/pixi-filters.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.css" />
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/javascript/javascript.js"></script>
+
+        <link href="css/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="canvas-container">
+                <div class="canvas-wrapper">
+                    <canvas id="scspine-canvas" width="1920" height="1920"></canvas>
+                </div>
+            </div>
+            <div class="side-menu">
+                <div class="ui-flex label-flex">
+                    <span>Canvas:</span>
+                    <input type="number" id="input-canvas-width" value="1920" />
+                    <span>×</span>
+                    <input type="number" id="input-canvas-height" value="1920" />
+                </div>
+
+                <div class="ui-flex">
+                    <label>RecordFPS:<input type="number" id="input-record-fps" min="0" value="60" /></label>
+                </div>
+
+                <div class="ui-flex">
+                    <input type="button" id="start-record-button" value="Start Record" />
+                    <input type="button" id="stop-record-button" value="Stop Record " />
+                </div>
+
+                <hr />
+
+                <div class="ui-flex">
+                    <label for="idol-select"
+                        >Idol:
+                        <select id="idol-select"></select
+                    ></label>
+                    <label for="type-select"
+                        >Type:
+                        <select id="type-select"></select
+                    ></label>
+                </div>
+                <div class="ui-flex">
+                    <label for="dress-select">Dress:</label>
+                    <select id="dress-select"></select>
+                </div>
+
+                <div class="ui-flex ui-x-y-s">
+                    <label>
+                        X:
+                        <input type="number" id="input-x" value="0" step="0" />
+                    </label>
+                    <label>
+                        Y:
+                        <input type="number" id="input-y" value="0" step="0" />
+                    </label>
+                    <label>
+                        Scale:
+                        <input type="number" id="input-scale" value="2" step="0.01" />
+                    </label>
+                </div>
+
+                <hr />
+
+                <div class="ui-flex">
+                    <label>
+                        Animation:
+                        <select id="anim-select"></select>
+                    </label>
+                    <label class="flex-shrink-3">
+                        Track:
+                        <input type="number" id="input-anim-track" min="0" value="0" />
+                    </label>
+                </div>
+                <div>
+                    <label>AnimationSpeed:<input type="number" id="input-animation-speed" min="0" value="1" step="0.01" /></label>
+                </div>
+                <div class="ui-flex">
+                    <input type="button" id="anim-play-button" value="Play" />
+                    <input type="button" id="anim-clear-button" value="Clear" />
+                </div>
+
+                <hr />
+
+                <div>
+                    <label for="">Animation command:</label>
+                    <textarea id="anim-command-textarea" cols="40" rows="24" spellcheck="false"> </textarea>
+                    <br />
+                    <input type="button" id="anim-command-play-button" value="Play Command" />
+                </div>
+
+                <hr />
+
+                <div class="ui-flex ui-mix-duration accordion is-expand">
+                    <label>
+                        animationMixDuration:
+                        <input type="number" id="input-animationMixDuration" min="0" value="0.7" step="0.001" />
+                    </label>
+                    <label>
+                        relayDuration:
+                        <input type="number" id="input-relayDuration" min="0" value="0.5" step="0.001" />
+                    </label>
+                    <label>
+                        relayMixDuration_in:
+                        <input type="number" id="input-relayMixDuration_in" min="0" value="0.4" step="0.001" />
+                    </label>
+                    <label>
+                        relayMixDuration_out:
+                        <input type="number" id="input-relayMixDuration_out" min="0" value="0.5" step="0.001" />
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="js/index.js"></script>
+    </body>
+</html>
