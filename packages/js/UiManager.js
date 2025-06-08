@@ -61,6 +61,7 @@ class UiManager {
 
         // input-anim-track
         this.animAnimTrack = document.querySelector('#input-anim-track');
+        this.animAnimTrack.addEventListener('wheel', this.onNumMouseWheel);
 
         // anim-play-button
         this.animPlayButton = document.querySelector('#anim-play-button');
